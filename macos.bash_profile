@@ -11,6 +11,8 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
+export PATH=$HOME/miniconda3/bin:$PATH
+
 check_conda_env ()
 {
     if [ ! -z "$CONDA_DEFAULT_ENV" ]; then
@@ -18,10 +20,11 @@ check_conda_env ()
     fi
 }
 
-source $HOME/bin/.git-prompt.sh
+source $HOME/bin/git-prompt.sh
 
-PROMPT_COMMAND='__git_ps1 "\[\e]0;\u@$(scutil --get ComputerName): \w\a\]$(check_conda_env)\[\e[01;32m\]\u@$(scutil --get ComputerName)\[\e[00m\]:\[\e[01;34m\]\w\[\e[00m\]" "\$ "'
+PROMPT_COMMAND='__posh_git_ps1 "\[\e]0;\u@$(scutil --get ComputerName): \w\a\]$(check_conda_env)\[\e[01;32m\]\u@$(scutil --get ComputerName)\[\e[00m\]:\[\e[01;34m\]\w\[\e[00m\]" "\$ "'
 eval "$(register-python-argcomplete conda)"
 
 alias la='ls -al'
 alias l='ls -alF'
+
