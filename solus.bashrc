@@ -4,6 +4,7 @@ FG="\[\033[38;5;081m\]"
 BG="\[\033[38;5;245m\]"
 AT="\[\033[38;5;245m\]"
 HCOLOR="\[\033[38;5;206m\]"
+CONDA_COLOR="\[\033[38;5;015m\]"
 
 alias la="ls -la"
 
@@ -13,7 +14,7 @@ conda activate base
 check_conda_env ()
 {
     if [ ! -z "$CONDA_DEFAULT_ENV" ]; then
-        printf -- "%s" "${HCOLOR}[`basename $CONDA_DEFAULT_ENV`]\[\e[0m\] "
+        printf -- "%s" "${CONDA_COLOR}(`basename $CONDA_DEFAULT_ENV`)\[\e[0m\] "
     fi
 }
 
