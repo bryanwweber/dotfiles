@@ -8,6 +8,8 @@ CONDA_COLOR="\[\033[38;5;015m\]"
 
 alias la="ls -la"
 
+export PATH=$PATH:$HOME/.local/bin
+
 . $HOME/miniconda3/etc/profile.d/conda.sh
 conda activate base
 
