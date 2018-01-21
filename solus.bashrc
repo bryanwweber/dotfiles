@@ -7,7 +7,8 @@ HCOLOR="\[\033[38;5;206m\]"
 
 alias la="ls -la"
 
-export PATH=$HOME/miniconda3/bin:$HOME/bin:$HOME/.local/bin:$PATH
+. $HOME/miniconda3/etc/profile.d/conda.sh
+conda activate base
 
 check_conda_env ()
 {
