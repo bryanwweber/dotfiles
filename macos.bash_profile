@@ -11,18 +11,21 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
-export PATH=$HOME/miniconda3/bin:$PATH
+. /Users/bryan/miniconda3/etc/profile.d/conda.sh
+conda activate
 
 check_conda_env ()
 {
     if [ ! -z "$CONDA_DEFAULT_ENV" ]; then
         printf -- "%s" "\[\e[0;35m\][`basename $CONDA_DEFAULT_ENV`]\[\e[0m\] "
+    else
+        printf -- "%s" ""
     fi
 }
 
 source $HOME/bin/git-prompt.sh
 
-PROMPT_COMMAND='__posh_git_ps1 "\[\e]0;\u@$(scutil --get ComputerName): \w\a\]$(check_conda_env)\[\e[01;32m\]\u@$(scutil --get ComputerName)\[\e[00m\]:\[\e[01;34m\]\w\[\e[00m\]" "\$ "'
+PROMPT_COMMAND='__posh_git_ps1 "$(check_conda_env)\[\e[01;32m\]\u@$(scutil --get ComputerName)\[\e[0m\]:\[\e[01;34m\]\w\[\e[0m\]" "\$ "'
 eval "$(register-python-argcomplete conda)"
 
 alias la='ls -al'
@@ -32,3 +35,6 @@ alias l='ls -alF'
 export PATH="$PATH:$HOME/.rvm/bin"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
