@@ -7,12 +7,32 @@ HISTCONTROL=ignoredups:ignorespace
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
+if type brew 2&>/dev/null; then
+  source "$(brew --prefix)/etc/bash_completion"
+else
+  echo "run: brew install git bash-completion"
 fi
 
+# This block is useful after conda 4.6 is released. For 4.5
+# it does the sourcing bit which is below anyways.
+# >>> conda init >>>
+# !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$(CONDA_REPORT_ERRORS=false '/Users/bryan/miniconda3/bin/conda' shell.bash hook 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     \eval "$__conda_setup"
+# else
+#     if [ -f "/Users/bryan/miniconda3/etc/profile.d/conda.sh" ]; then
+#         . "/Users/bryan/miniconda3/etc/profile.d/conda.sh"
+#         CONDA_CHANGEPS1=false conda activate base
+#     else
+#         \export PATH="/Users/bryan/miniconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# <<< conda init <<<
+
 . /Users/bryan/miniconda3/etc/profile.d/conda.sh
-conda activate
+conda activate base
 
 check_conda_env ()
 {
