@@ -1,6 +1,0 @@
-[submodule "posh-git-sh"]
-	path = posh-git-sh
-	url = https://github.com/lyze/posh-git-sh
-[submodule "zsh-autoenv"]
-	path = zsh-autoenv
-	url = https://github.com/Tarrasch/zsh-autoenv.git
