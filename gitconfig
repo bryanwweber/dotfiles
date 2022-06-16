@@ -1,0 +1,17 @@
+[user]
+	name = Bryan Weber
+	email = bryan.w.weber@gmail.com
+[alias]
+	co = checkout
+    pum = !git pull upstream main && git push
+[credential "https://github.com"]
+	helper = !/usr/bin/gh auth git-credential
+[core]
+	excludesfile = ~/.gitignore
+	editor = nvim --clean
+[rebase]
+	autosquash = true
+[init]
+	defaultBranch = main
+[pull]
+	ff = only
