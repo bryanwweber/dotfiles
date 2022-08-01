@@ -1,0 +1,14 @@
+format = "$directory$git_branch$git_status$python$conda$battery$line_break$status$character"
+command_timeout = 2000
+add_newline = true
+right_format = "$time$battery"
+
+[conda]
+ignore_base = false
+format = "[$symbol$environment]($style) "
+
+[time]
+disabled = false
+
+[python]
+format = "[$symbol$virtualenv]($style) "
