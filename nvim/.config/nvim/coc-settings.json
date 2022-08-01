@@ -1,16 +1,11 @@
 {
     "coc.preferences.willSaveHandlerTimeout": 5000,
     "pyright.organizeimports.provider": "isort",
-	"python.pythonPath": "/home/bryanw/.local/bin/pyshim",
-	"python.formatting.blackdPath": "/home/bryanw/.local/bin/blackd",
-	"python.formatting.blackPath": "/home/bryanw/.local/bin/black",
-    "python.formatting.provider": "black",
-    "python.sortImports.path": "/home/bryanw/.local/bin/isort",
-	"python.linting.flake8Path": "/home/bryanw/.local/bin/flake8",
 	"texlab.build.executable": "tectonic",
 	"texlab.build.onSave": true,
 	"texlab.build.args": [
 		"-X",
 		"build"
-	]
+	],
+    "coc.preferences.formatOnSaveFiletypes": ["css", "markdown"]
 }
