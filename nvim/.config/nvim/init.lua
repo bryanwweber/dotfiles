@@ -55,3 +55,5 @@ if vim.fn.executable('ag') == 1 then
     set.grepprg="ag --nocolor --nogroup"
     vim.g.ctrl_p_user_command = 'ag %s -l --nocolor -g ""'
 end
+
+vim.g.coc_global_extensions = {"coc-clangd", "coc-docker", "coc-emoji", "coc-git", "coc-html", "coc-json", "coc-lists", "coc-ltex", "coc-lua", "coc-markdown-preview-enhanced", "coc-markdownlint", "coc-prettier", "coc-pyright", "coc-terminal", "coc-toml", "coc-yaml"}
