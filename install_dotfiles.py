@@ -16,7 +16,7 @@ def main(argv):
         nargs="*",
         help=(
             "The program for which dotfiles will be installed. Must be a directory in"
-            "this folder."
+            " this folder."
         ),
         type=Path,
     )
