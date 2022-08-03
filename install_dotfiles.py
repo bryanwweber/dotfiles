@@ -39,9 +39,11 @@ def main(argv):
                 continue
             link.symlink_to(item)
 
-    def install_dotfiles(program: Path):
-        for item in program.iterdir():
-            link = Path.home() / item.relative_to(program)
+    def install_dotfiles(this_program: Path):
+        for item in this_program.iterdir():
+            if item.name == "README.md" or item.name == ".config":
+                continue
+            link = Path.home() / item.relative_to(this_program)
             if item.is_dir():
                 link.mkdir(exist_ok=True)
                 link_directory(item, link)
