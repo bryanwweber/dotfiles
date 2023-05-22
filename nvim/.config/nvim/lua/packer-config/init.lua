@@ -58,6 +58,7 @@ function M.setup()
     -- Autocompletion snippets
     use { 'L3MON4D3/LuaSnip' }
     use { 'saadparwaiz1/cmp_luasnip' }
+
     -- Colorscheme
     use {
       "sainnhe/everforest",
@@ -81,6 +82,9 @@ function M.setup()
       "jose-elias-alvarez/null-ls.nvim",
       requires = { "nvim-lua/plenary.nvim" },
     }
+
+    use { "davidmh/cspell.nvim" }
+
     -- Load only when required
     use { "nvim-lua/plenary.nvim" }
   end
