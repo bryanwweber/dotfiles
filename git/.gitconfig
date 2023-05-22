@@ -3,15 +3,26 @@
 	email = bryan.w.weber@gmail.com
 [alias]
 	co = checkout
-    pum = !git pull upstream main && git push
-[credential "https://github.com"]
-	helper = !/usr/bin/gh auth git-credential
+	pum = !git pull upstream main && git push
+	cp = cherry-pick
+	lb = !git --no-pager log --oneline --decorate=short main..
+	dft = difftool
+	sm = switch main
+	tc = !git add changelog.d && git commit -nm 'Towncrier'
+	s = switch
+	lint = commit -am 'LINTING!!!!'
+	wip = commit -nm WIP
+	rh1 = reset HEAD~1
+
 [core]
 	excludesfile = ~/.gitignore
 	editor = nvim --clean
+
 [rebase]
 	autosquash = true
+
 [init]
 	defaultBranch = main
+
 [pull]
 	ff = only
