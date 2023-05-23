@@ -5,7 +5,7 @@ function M.setup()
   -- Plugins
   local function plugins(use)
     use { "wbthomason/packer.nvim" }
-  
+
     -- Icons
     use { "nvim-tree/nvim-web-devicons" }
 
@@ -46,7 +46,7 @@ function M.setup()
 
     -- Refactoring/go-to-definition plugin for Treesitter
     -- with fallback to LSP if needed
-    use { 
+    use {
           "nvim-treesitter/nvim-treesitter-refactor",
           requires = { "nvim-treesitter/nvim-treesitter" }
         }
@@ -60,12 +60,13 @@ function M.setup()
     use { 'saadparwaiz1/cmp_luasnip' }
 
     -- Colorscheme
-    use {
-      "sainnhe/everforest",
-      config = function()
-        vim.cmd "colorscheme everforest"
-      end,
-    }
+    use { "rebelot/kanagawa.nvim" }
+    -- use {
+    --   "sainnhe/everforest",
+    --   config = function()
+    --     vim.cmd "colorscheme everforest"
+    --   end,
+    -- }
 
     -- Mason.nvim manages LSP plugins
     use {
