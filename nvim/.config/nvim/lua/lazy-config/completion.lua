@@ -3,6 +3,7 @@ return {
     -- snippets
     {
         "L3MON4D3/LuaSnip",
+        enabled = false,
         dependencies = {
             "rafamadriz/friendly-snippets",
             config = function()
@@ -16,22 +17,31 @@ return {
     },
 
     -- auto completion
+    { "hrsh7th/cmp-buffer", enabled = false, },
+    { "hrsh7th/cmp-path", enabled = false, },
     {
         "hrsh7th/nvim-cmp",
         version = false, -- last release is way too old
+        enabled = false,
         event = "InsertEnter",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "saadparwaiz1/cmp_luasnip",
+            "zbirenbaum/copilot-cmp",
         },
         opts = function()
             local cmp = require("cmp")
             local luasnip = require("luasnip")
+            local has_words_before = function()
+                if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+                return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+            end
             return {
                 completion = {
-                    completeopt = "menu,menuone,noinsert",
+                    completeopt = "menu,menuone,noselect",
                 },
                 snippet = {
                     expand = function(args)
@@ -46,26 +56,27 @@ return {
                     ["<C-Space>"] = cmp.mapping.complete(),
                     ["<C-e>"] = cmp.mapping.abort(),
                     ["<CR>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
-                    -- ["<Tab>"] = function(fallback)
-                    --     if cmp.visible() then
-                    --         cmp.select_next_item()
-                    --     elseif luasnip.expand_or_jumpable() then
-                    --         luasnip.expand_or_jump()
-                    --     else
-                    --         fallback()
-                    --     end
-                    -- end,
-                    -- ["<S-Tab>"] = function(fallback)
-                    --     if cmp.visible() then
-                    --         cmp.select_prev_item()
-                    --     elseif luasnip.jumpable(-1) then
-                    --         luasnip.jump(-1)
-                    --     else
-                    --         fallback()
-                    --     end
-                    -- end,
+                    ["<Tab>"] = vim.schedule_wrap(function(fallback)
+                        if cmp.visible() and has_words_before() then
+                            cmp.select_next_item()
+                        elseif luasnip.expand_or_jumpable() then
+                            luasnip.expand_or_jump()
+                        else
+                            fallback()
+                        end
+                    end),
+                    ["<S-Tab>"] = function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item()
+                        elseif luasnip.jumpable(-1) then
+                            luasnip.jump(-1)
+                        else
+                            fallback()
+                        end
+                    end,
                 }),
                 sources = cmp.config.sources({
+                    { name = "copilot" },
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
                     { name = "buffer" },
@@ -74,37 +85,10 @@ return {
             }
         end,
     },
-
-    -- surround
     {
-        "echasnovski/mini.surround",
-        keys = function(self, keys)
-            -- Populate the keys based on the user's options
-            local opts = self.opts
-            local mappings = {
-                { opts.mappings.add,            desc = "Add surrounding",                     mode = { "n", "v" } },
-                { opts.mappings.delete,         desc = "Delete surrounding" },
-                { opts.mappings.find,           desc = "Find right surrounding" },
-                { opts.mappings.find_left,      desc = "Find left surrounding" },
-                { opts.mappings.highlight,      desc = "Highlight surrounding" },
-                { opts.mappings.replace,        desc = "Replace surrounding" },
-                { opts.mappings.update_n_lines, desc = "Update `MiniSurround.config.n_lines`" },
-            }
-            mappings = vim.tbl_filter(function(m)
-                return m[1] and #m[1] > 0
-            end, mappings)
-            return vim.list_extend(mappings, keys)
-        end,
-        opts = {
-            mappings = {
-                add = "gza",            -- Add surrounding in Normal and Visual modes
-                delete = "gzd",         -- Delete surrounding
-                find = "gzf",           -- Find surrounding (to the right)
-                find_left = "gzF",      -- Find surrounding (to the left)
-                highlight = "gzh",      -- Highlight surrounding
-                replace = "gzr",        -- Replace surrounding
-                update_n_lines = "gzn", -- Update `n_lines`
-            },
-        },
+        "zbirenbaum/copilot-cmp",
+        enabled = false,
+        config = true,
     },
+
 }

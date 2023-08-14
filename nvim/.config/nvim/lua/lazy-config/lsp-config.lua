@@ -45,7 +45,7 @@ return {
             -- Mason.nvim manages LSP plugins
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
-            "hrsh7th/cmp-nvim-lsp",
+            -- "hrsh7th/cmp-nvim-lsp",
         },
         opts = {
             diagnostics = {},
@@ -86,7 +86,7 @@ return {
                 "force",
                 {},
                 vim.lsp.protocol.make_client_capabilities(),
-                require("cmp_nvim_lsp").default_capabilities(),
+                -- require("cmp_nvim_lsp").default_capabilities(),
                 opts.capabilities or {}
             )
 
