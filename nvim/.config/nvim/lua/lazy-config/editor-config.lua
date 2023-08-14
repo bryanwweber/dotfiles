@@ -2,13 +2,12 @@ return {
     -- fuzzy finder
     {
         "nvim-telescope/telescope.nvim",
-        commit = vim.fn.has("nvim-0.9.0") == 0 and "057ee0f8783" or nil,
+        branch = "0.1.x",
         cmd = "Telescope",
         dependencies = {
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
             { "nvim-lua/plenary.nvim" },
         },
-        version = false, -- telescope did only one release, so use HEAD for now
         keys = {
             {
                 "<leader>ff",

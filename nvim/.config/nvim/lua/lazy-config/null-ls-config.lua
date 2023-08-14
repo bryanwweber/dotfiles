@@ -16,6 +16,7 @@ end
 return {
     {
         "jay-babu/mason-null-ls.nvim",
+        enabled = false,
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "williamboman/mason.nvim",
@@ -37,6 +38,7 @@ return {
                 "mypy",
                 "ruff",
                 "yamllint",
+                "prettierd",
             },
             automatic_installation = false,
             handlers = {},
@@ -44,6 +46,7 @@ return {
     },
     {
         "jose-elias-alvarez/null-ls.nvim",
+        enabled = false,
         dependencies = { "nvim-lua/plenary.nvim", "davidmh/cspell.nvim" },
         config = function()
             local null_ls = require("null-ls")
@@ -62,6 +65,7 @@ return {
     },
     {
         "davidmh/cspell.nvim",
+        enabled = false,
         config = function()
             local cspell = require("cspell")
             require("null-ls").register({

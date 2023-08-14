@@ -164,6 +164,10 @@ return {
         build = ":MasonUpdate",
     },
     {
+        "williamboman/mason-lspconfig",
+        config = true,
+    },
+    {
         "mfussenegger/nvim-dap",
         dependencies = { "rcarriga/nvim-dap-ui" },
     },

@@ -53,7 +53,7 @@ return {
                     elseif vim.o.background == "dark" then
                         vim.fn.system("kitty +kitten themes Kanagawa_lotus")
                     else
-                        vim.fn.system("kitty +kitten themes Kanagawa")
+                        vim.fn.system("kitty +kitten themes Kanagawa_lotus")
                     end
                 end,
             })
