@@ -72,6 +72,7 @@ return {
                 },
                 yamlls = {},
                 taplo = {},
+                ruff_lsp = {},
             },
             capabilities = {},
             setup = {},
@@ -164,18 +165,34 @@ return {
     },
     {
         "mfussenegger/nvim-dap",
-        dependencies = { "williamboman/mason.nvim" },
+        dependencies = { "rcarriga/nvim-dap-ui" },
     },
     {
         "mfussenegger/nvim-dap-python",
         dependencies = { "mfussenegger/nvim-dap" },
         config = function()
-            dap = require("dap-python")
+            local dap = require("dap-python")
             dap.setup("~/.local/share/nvim/mason/packages/debugpy/venv/bin/python")
             dap.test_runner = "pytest"
         end,
         keys = {
             { "<leader>dn", ":lua require('dap-python').test_method()<CR>", desc = "Debug the current test method" },
         },
+    },
+    {
+        "rcarriga/nvim-dap-ui",
+        config = function()
+            local dap = require("dap")
+            local dapui = require("dapui")
+            dap.listeners.after.event_initialized["dapui_config"] = function()
+              dapui.open()
+            end
+            dap.listeners.before.event_terminated["dapui_config"] = function()
+              dapui.close()
+            end
+            dap.listeners.before.event_exited["dapui_config"] = function()
+              dapui.close()
+            end
+        end
     },
 }

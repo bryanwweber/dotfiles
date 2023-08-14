@@ -156,8 +156,6 @@ return {
             end,
         },
     },
-    -- Highlight colors like #RRGGBBAA in the buffer
-    { "norcalli/nvim-colorizer.lua", config = true },
     -- Status line
     {
         "nvim-lualine/lualine.nvim",

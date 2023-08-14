@@ -10,12 +10,13 @@ return {
             { "<bs>",      desc = "Decrement selection", mode = "x" }
         },
         opts = {
-            highlight = { enable = true },
+            highlight = { enable = true, additional_vim_regex_highlighting = false, },
             indent = { enable = true },
             ensure_installed = {
-                "bash", "c", "html", "javascript", "json", "lua", "luadoc",
-                "luap", "markdown", "markdown_inline", "python", "regex", "vim",
-                "vimdoc", "yaml"
+                "bash", "c", "comment", "cpp", "css", "diff", "dockerfile",
+                "git_config", "git_rebase", "gitcommit", "gitignore", "html", "ini",
+                "javascript", "json", "lua", "luadoc", "luap", "markdown",
+                "markdown_inline", "python", "regex", "rst", "toml", "vim", "vimdoc", "yaml"
             },
             incremental_selection = {
                 enable = true,
