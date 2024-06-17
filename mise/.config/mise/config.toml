@@ -1,0 +1,11 @@
+[tools]
+python = "3.12"
+go = "1.22"
+node = "20"
+pdm = "latest"
+starship = "latest"
+pipx = "latest"
+bottom = "latest"
+watchexec = "latest"
+neovim = "latest"
+yamllint = "latest"
