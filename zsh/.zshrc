@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -25,11 +25,11 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
+zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
+zstyle ':omz:update' frequency 6
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -71,15 +71,27 @@ export ZSH="$HOME/.oh-my-zsh"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+	mise
 	git
 	colored-man-pages
 	command-not-found
 	zsh-autosuggestions
 	zsh-syntax-highlighting
-	pip
-	conda-zsh-completion
-	pdm
+	starship
 )
+
+# Set up Pyenv root
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# export ZSH_PYENV_QUIET=true
+# export ZSH_PYENV_VIRTUALENV=false
+
+# Add rust to the path. This has to be done before sourcing oh-my-zsh
+# because of the starship plugin
+# export PATH="$HOME/.cargo/bin:$PATH"
+
+# Add local to the PATH for geeqie
+export PATH="$HOME/bin:$PATH"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -90,34 +102,29 @@ autoload -U bashcompinit && bashcompinit
 
 # User configuration
 
-# Add rust to the path, but do it before conda
-export PATH="$HOME/.cargo/bin:$PATH"
+alias vim='nvim'
+alias yoink='git pull'
+alias yeet='git push -f'
+alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 
-# Add micromamba to the path
-export PATH="$HOME/.local/bin:$PATH"
+export CDPATH=".:${HOME}/GitHub:$CDPATH"
 
-export MAMBA_NO_BANNER=1
-
-# >>> mamba initialize >>>
-# !! Contents within this block are managed by 'mamba init' !!
-export MAMBA_EXE="/home/bryanw/.local/bin/micromamba";
-export MAMBA_ROOT_PREFIX="/home/bryanw/micromamba";
-__mamba_setup="$('/home/bryanw/.local/bin/micromamba' shell hook --shell zsh --prefix '/home/bryanw/micromamba' 2> /dev/null)"
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/bryan/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
-    eval "$__mamba_setup"
+    eval "$__conda_setup"
 else
-    if [ -f "/home/bryanw/micromamba/etc/profile.d/micromamba.sh" ]; then
-        . "/home/bryanw/micromamba/etc/profile.d/micromamba.sh"
+    if [ -f "/home/bryan/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/home/bryan/miniforge3/etc/profile.d/conda.sh"
     else
-        export  PATH="/home/bryanw/micromamba/bin:$PATH"  # extra space after export prevents interference from conda init
+        export PATH="/home/bryan/miniforge3/bin:$PATH"
     fi
 fi
-unset __mamba_setup
-# <<< mamba initialize <<<
-alias mamba='micromamba'
-alias conda='micromamba'
+unset __conda_setup
 
-eval $(starship init zsh)
-alias vim='nvim'
+if [ -f "/home/bryan/miniforge3/etc/profile.d/mamba.sh" ]; then
+    . "/home/bryan/miniforge3/etc/profile.d/mamba.sh"
+fi
+# <<< conda initialize <<<
 
-export CDPATH=".:/home/bryanw/GitHub:$CDPATH"
