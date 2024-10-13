@@ -1,6 +1,8 @@
 [user]
 	name = Bryan Weber
 	email = bryan.w.weber@gmail.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFYw4ynkCKTMXtM8vhI95HD9iB+HyJJTUrXoawKiQNgs
+
 [alias]
 	co = checkout
 	pum = !git pull upstream main && git push
@@ -13,6 +15,15 @@
 	lint = commit -am 'LINTING!!!!'
 	wip = commit -nm WIP
 	rh1 = reset HEAD~1
+
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	program = "/opt/1Password/op-ssh-sign"
+
+[commit]
+	gpgsign = true
 
 [core]
 	excludesfile = ~/.gitignore
